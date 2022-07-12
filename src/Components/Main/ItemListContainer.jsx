@@ -1,28 +1,42 @@
 import { useEffect, useState } from "react";
-import Item from "./Item";
+import { useParams } from "react-router-dom";
 import ItemList from "./ItemList";
 import Spinner from "./Spinner";
 
 const ItemListContainer = (props) => {
 
+    const { categoryName } = useParams();
+
     const [items, setItems] = useState([])
 
-    async function getItems() {
-        const response = await fetch('https://fakestoreapi.com/products');
+    const [pantallacarga, setPantallacarga] = useState(false)
+
+    const [categoryDisplay, setCategoryDisplay] = useState("GENERAL")
+
+    async function getItems(URL) {
+        const response = await fetch(URL);
         const data = await response.json();
         setItems(data);
         setPantallacarga(false)        
       }
       
     useEffect(() => {
-        setTimeout(() => {
-            getItems()
+        const URL = categoryName ? 
+        `https://fakestoreapi.com/products/category/${categoryName}` :
+        'https://fakestoreapi.com/products';        
+        setPantallacarga(!pantallacarga)
+        setCategoryDisplay(categoryName? categoryName : "GENERAL")
 
+        setTimeout(() => {
+
+            getItems(URL)
+            setPantallacarga(!pantallacarga)
         }, 2000);
 
-    }, [])
+
+    }, [categoryName])
         
-    const [pantallacarga, setPantallacarga] = useState(true)
+
 
     
 
@@ -30,13 +44,13 @@ const ItemListContainer = (props) => {
         <div className="pb-32">
             <div className="flex pl-12 pt-5">
                 <h1 className=" text-3xl font-bold text-gray-700
-                 lg:text-6xl lg:pb-32 lg:pt-12">{props.greeting}</h1>
+                 lg:text-6xl lg:pb-32 lg:pt-12 uppercase">{categoryDisplay}</h1>
             </div>
-            {pantallacarga ? <div className="flex justify-center pb-52"><Spinner /></div> : <></> }
-            <div className="flex flex-wrap justify-center box-border
-            sm:pl-12 sm:pr-12 sm:gap-24">
-                {items.map((item) => <ItemList image={item.image} price={item.price} title={item.title} key={item.id}/>)}
-            </div>
+            {pantallacarga ? <div className="flex justify-center pb-52"><Spinner /></div> :<div className="flex flex-wrap justify-center box-border
+                sm:pl-12 sm:pr-12 sm:gap-24">
+                    {items.map((item) => <ItemList image={item.image} price={item.price} title={item.title} key={item.id} id={item.id}/>)}
+                </div> 
+            };
         </div>
     );
 };

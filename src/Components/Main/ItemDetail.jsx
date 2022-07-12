@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ItemCount from "./ItemCount";
 
+
 const ItemDetail = ({product}) => {
     
     const [btnColor, stateBtnColor] = useState(true)
@@ -21,14 +22,23 @@ const ItemDetail = ({product}) => {
                 <div className="flex items-end gap-4">
                     <h3 className="font-bold mt-10">Select a Color</h3>
                     {
-                        btnColor? <button className="w-7 h-7 border-solid border-grey border-2 bg-black" onClick={handleColor}></button> : 
-                        <button className="w-7 h-7 border-black border-solid border-grey border-2 bg-white"onClick={handleColor}></button>
+                        btnColor ?
+                         
+                        <button className="w-7 h-7 border-solid border-gray-500 border-2 bg-black" onClick={handleColor}></button> 
+
+                        : 
+
+                        <button className="w-7 h-7 border-solid border-2 border-red-600 bg-black"onClick={handleColor}></button>
                     }
 
 
                     {
-                        btnColor? <button className="w-7 h-7 border-solid border-grey border-2 bg-white"onClick={handleColor}></button> :
-                        <button className="w-7 h-7 border-solid border-grey border-2 bg-black" onClick={handleColor}></button> 
+                        btnColor ? 
+                        <button className="w-7 h-7 border-solid border-red-600 border-2 bg-white"onClick={handleColor}></button> 
+
+                        :
+
+                        <button className="w-7 h-7 border-solid border-gray-500 border-2 bg-white" onClick={handleColor}></button> 
                     }
                 </div>
                 <div className="gap-8 sm:flex sm-pt-6 sm-pb-6">
@@ -39,8 +49,10 @@ const ItemDetail = ({product}) => {
                     <h3 className="font-bold text-center sm:text-start">DESCRIPTION</h3>
                     <p className="text-center sm:text-start">{product.description}</p>
                 </div>
-                <div className="flex justify-center sm:justify-start">
-                    <span className=" text-red-600 font-extrabold text-lg ">$ {product.price}</span>                    
+                <div className="flex flex-col items-center sm:justify-start">
+                    <span className=" text-red-600 font-extrabold text-lg ">$ {product.price}</span>     
+                    <span className="bg-red-600 text-white pt-1 pb-1 pr-3 pl-3 
+                hover:bg-black">ADD TO CART</span>               
                 </div>
 
             </div>

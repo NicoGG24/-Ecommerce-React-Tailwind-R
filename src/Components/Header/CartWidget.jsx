@@ -1,12 +1,10 @@
 import { BsBag } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 
 const CartWidget = () => {
     return(
-        <>
-            <a href="#"><BsBag size={20} /></a>
-        </>
-
+            <Link to="/Cart"><BsBag size={20} /></Link>
     );
 
 };
