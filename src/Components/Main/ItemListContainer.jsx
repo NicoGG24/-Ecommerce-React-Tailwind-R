@@ -38,8 +38,6 @@ const ItemListContainer = (props) => {
         
 
 
-    
-
     return(
         <div className="pb-32">
             <div className="flex pl-12 pt-5">
