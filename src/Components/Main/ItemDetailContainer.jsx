@@ -6,7 +6,6 @@ const ItemDetailContainer = () => {
 
     const [detail, setDetail] = useState([]);
     const { itemId } = useParams()
-    console.log(itemId)
     
     function getItem() {
         fetch(`https://fakestoreapi.com/products/${itemId}`)

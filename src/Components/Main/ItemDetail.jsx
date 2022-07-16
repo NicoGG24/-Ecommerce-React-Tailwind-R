@@ -5,12 +5,18 @@ import ItemCount from "./ItemCount";
 const ItemDetail = ({product}) => {
     
     const [btnColor, stateBtnColor] = useState(true)
-    const [addedAmmount, setAddedAmmount] = useState()
+    
+    const [cartAmmount, setCartAmmount] = useState(0)
 
     const handleColor = () => {
         stateBtnColor(!btnColor)
     }
 
+    
+    const onAdd = (a) => {
+        setCartAmmount(prevCount => prevCount + a);
+        console.log(cartAmmount)
+    }
 
 
     return(
@@ -50,7 +56,7 @@ const ItemDetail = ({product}) => {
                 </div>
                 <div className="gap-6 sm:flex sm:items-center sm:justify-start sm-pt-6 sm-pb-6">
                     <h3 className="text-center pt-4 sm:text-start font-bold">Ammount:</h3>
-                    <ItemCount stock={8} />
+                    <ItemCount onAdd={onAdd} cartAmmount={cartAmmount} stock={8} />
                     <div className="flex flex-col items-center sm:justify-start">
                         <span className=" text-red-600 font-extrabold text-lg ">${product.price}</span>                 
                     </div>

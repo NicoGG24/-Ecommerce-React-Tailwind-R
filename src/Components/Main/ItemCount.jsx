@@ -14,21 +14,22 @@ const ItemCount = (props) => {
         (ammount>0) ? setAmmount(prevCount => prevCount - 1 ) : alert("Cantidad Invalida.")
     }
 
-    const onAdd = () => {
+    const addToCart = () => {
+        props.onAdd(Number(ammount))  
         setSelection(!selection)
     }
 
     return(
-        selection ? <div className="flex flex-col items-center">
-                <div className="flex items-center pl-10 pr-10 pt-5 pb-5 gap-3">
-                    <MdRemoveCircle className="cursor-pointer" onClick={removeBtn} />
-                    <div>{ammount}</div>
-                    <MdAddCircleOutline className="cursor-pointer" onClick={addBtn} />
-                </div>
-                <span className="bg-red-600 text-white pt-1 pb-1 pr-3 pl-3 hover:cursor-pointer
-                hover:bg-black" onClick={onAdd}>ADD TO CART</span>         
-            </div> : <Link to="/Cart" className="bg-red-600 text-white pt-1 pb-1 pr-3 pl-3 hover:cursor-pointer
-                hover:bg-black" >FINISH </Link>  
+                <div className="flex flex-col items-center">
+                    <div className="flex items-center pl-10 pr-10 pt-5 pb-5 gap-3">
+                        <MdRemoveCircle className="cursor-pointer" onClick={removeBtn} />
+                        <div>{ammount}</div>
+                        <MdAddCircleOutline className="cursor-pointer" onClick={addBtn} />
+                        <div>{props.cartAmmount}</div>
+                    </div>
+                    <Link className="bg-red-600 text-white pt-1 pb-1 pr-3 pl-3 hover:cursor-pointer
+                    hover:bg-black" onClick={addToCart} to="/Cart">ADD TO CART</Link>         
+                </div> 
     );
 };
 
