@@ -1,12 +1,16 @@
 import { useState } from "react";
 import ItemCount from "./ItemCount";
+import { useContext } from "react";
+import { contexto } from "../Context/CartContext";
 
-
-const ItemDetail = ({product}) => {
+const ItemDetail = ({ product }) => {
     
     const [btnColor, stateBtnColor] = useState(true)
     
     const [cartAmmount, setCartAmmount] = useState(0)
+
+    const { addItem } = useContext(contexto)
+
 
     const handleColor = () => {
         stateBtnColor(!btnColor)
@@ -15,7 +19,8 @@ const ItemDetail = ({product}) => {
     
     const onAdd = (a) => {
         setCartAmmount(prevCount => prevCount + a);
-        console.log(cartAmmount)
+        const newProduct = {...product, quantity: a}
+        addItem(newProduct)
     }
 
 

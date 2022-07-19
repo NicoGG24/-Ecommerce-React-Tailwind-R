@@ -23,12 +23,12 @@ const ItemCount = (props) => {
                 <div className="flex flex-col items-center">
                     <div className="flex items-center pl-10 pr-10 pt-5 pb-5 gap-3">
                         <MdRemoveCircle className="cursor-pointer" onClick={removeBtn} />
-                        <div>{ammount}</div>
+                        <div className="select-none">{ammount}</div>
                         <MdAddCircleOutline className="cursor-pointer" onClick={addBtn} />
                         <div>{props.cartAmmount}</div>
                     </div>
                     <Link className="bg-red-600 text-white pt-1 pb-1 pr-3 pl-3 hover:cursor-pointer
-                    hover:bg-black" onClick={addToCart} to="/Cart">ADD TO CART</Link>         
+                    hover:bg-black select-none" onClick={addToCart} to="/Cart">ADD TO CART</Link>         
                 </div> 
     );
 };
