@@ -3,7 +3,7 @@ import { MdAddCircleOutline, MdRemoveCircle } from "react-icons/md"
 import { Link } from "react-router-dom";
 
 const ItemCount = (props) => {
-    const [ammount, setAmmount] = useState(1);
+    const [ammount, setAmmount] = useState(props.minAmmount);
     const [selection, setSelection] = useState(true)
 
     const addBtn = () =>{

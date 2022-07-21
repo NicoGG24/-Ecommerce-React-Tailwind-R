@@ -14,7 +14,6 @@ const CartWidget = () => {
             <span className="text-red-600 font-bold">{cantidadCart}</span>
         </div>
     );
-
 };
 
 export default CartWidget;
