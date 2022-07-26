@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ItemList from "./ItemList";
 import Spinner from "./Spinner";
+import { db } from "../../firebase/firebase";
+import { getDocs, collection, query, where, getDoc } from "firebase/firestore"
+
 
 const ItemListContainer = (props) => {
 
@@ -21,17 +24,34 @@ const ItemListContainer = (props) => {
       }
       
     useEffect(() => {
-        const URL = categoryName ? 
-        `https://fakestoreapi.com/products/category/${categoryName}` :
-        'https://fakestoreapi.com/products';        
-        setPantallacarga(!pantallacarga)
+        const productCollection = collection(db, "products");
+        getDocs(productCollection)
+        .then(result => {
+            const lista = result.docs.map(doc => {
+                return {
+                    id: doc.id,
+                    ...doc.data(),
+                }
+            })
+            setItems(lista)
+        })
+        .catch(err => console.log(err))
         setCategoryDisplay(categoryName? categoryName : "GENERAL")
 
-        setTimeout(() => {
 
-            getItems(URL)
-            setPantallacarga(!pantallacarga)
-        }, 2000);
+        console.log(db)
+
+        // const URL = categoryName ? 
+        // `https://fakestoreapi.com/products/category/${categoryName}` :
+        // 'https://fakestoreapi.com/products';        
+        // setPantallacarga(!pantallacarga)
+        // setCategoryDisplay(categoryName? categoryName : "GENERAL")
+
+        // setTimeout(() => {
+
+        //     getItems(URL)
+        //     setPantallacarga(!pantallacarga)
+        // }, 2000);
 
 
     }, [categoryName])
